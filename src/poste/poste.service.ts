@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Poste } from './entities/poste.entity';
 import { Repository } from 'typeorm';
 import { Departement } from 'src/departement/entities/departement.entity';
+import { Service } from 'src/service/entities/service.entity';
 
 @Injectable()
 export class PosteService {
@@ -13,8 +14,6 @@ export class PosteService {
     @InjectRepository(Poste)
     private readonly PosteRepository: Repository<Poste>,
 
-    @InjectRepository(Departement)
-    private readonly DepartementRepository: Repository<Departement>,
   ){  }
 
   async create(createPosteDto: CreatePosteDto) {
@@ -23,28 +22,31 @@ export class PosteService {
     
     const newPoste = new Poste()
     try {
-      const departement = await this.DepartementRepository.findOne({
-        where:{id:+createPosteDto.departement}
-      }) 
+      // const service = await this.ServiceRepository.findOne({
+      //   where:{id:+createPosteDto.departement}
+      // }) 
       console.log(createPosteDto);
       newPoste.title = createPosteDto.title
       newPoste.description = createPosteDto.description
-      newPoste.departement = departement
+      newPoste.status = createPosteDto.status
       const poste= await this.PosteRepository.save(newPoste)
+
       console.log("le poste",poste);
       
     return newPoste;
     } catch (error) {
-      throw new ConflictException(error)
+      throw new ConflictException()
     }
     
   }
 
   async findAll() {
     try {
+      console.log("icicicicicici");
+
       const poste = await this.PosteRepository.find({
         relations:{
-          departement:true
+          colaborateur:true
         }
       })
       return poste
@@ -55,7 +57,11 @@ export class PosteService {
 
   async findOne(id: number) {
     try {
-      const poste = await this.PosteRepository.find()
+      console.log("icicicicicici");
+      
+      const poste = await this.PosteRepository.findOne({   where:{id: id},relations:{
+        colaborateur:true
+      }})
       return poste
     } catch (error) {
       throw new NotFoundException(error)
@@ -77,7 +83,7 @@ export class PosteService {
       Object.assign(poste, updatePosteDto)
       return await this.PosteRepository.save(poste)
     } catch (error) {
-      throw new NotFoundException(error)
+      throw new NotFoundException()
     }
   }
 
@@ -91,7 +97,7 @@ export class PosteService {
       await this.PosteRepository.delete({id});
       return true
     } catch (error) {
-      throw new NotFoundException(error)
+      throw new NotFoundException()
     }
   }
 }

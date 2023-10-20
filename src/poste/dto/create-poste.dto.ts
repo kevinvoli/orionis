@@ -13,15 +13,9 @@ export class CreatePosteDto {
   title: string;
 
   
-  status: string|null;
+  status: Status;
 
-  
-  type : string| null
-
-  
+  @IsString()
   description:string|null
 
-  @IsNotEmpty()
-  @IsString()
-  departement:string
 }

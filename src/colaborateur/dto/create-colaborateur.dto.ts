@@ -1,11 +1,17 @@
 import { IntegerType } from 'typeorm';
-import { Status } from '../../poste/entities/poste.entity';
 import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { CreateLinkDto } from 'src/link/dto/create-link.dto';
+
+export enum Status {
+  Active=  "Active",
+  Delete = "Delete",
+  Disable = "Disable"
+}
 export class CreateColaborateurDto {
 
   @IsNotEmpty()
   @IsString()
-  name:string;
+  nom:string;
 
 
   @IsNotEmpty()
@@ -13,24 +19,26 @@ export class CreateColaborateurDto {
   prenoms:string;
 
 
-  @IsBoolean()
-  Status: string|null;
+  Status: Status|null;
 
-
-  @IsInt({message:"un nombre entier obligatoire"})
-  contacts_flotte:string | null;
 
   @IsNotEmpty()
-  @IsInt()
-  contacts_perso: string;
+  telephone_fixe:string | null;
+
+  @IsNotEmpty()
+  telephone_portable: string;
 
 
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-
-  @IsInt()
   @IsNotEmpty()
   poste: number;
+
+  @IsNotEmpty()
+  service:string;
+
+
+  links : CreateLinkDto[]
 }

@@ -1,5 +1,5 @@
 import { IntegerType } from 'typeorm';
-import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsEmail, IsEmpty, IsInt, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
 import { CreateLinkDto } from 'src/link/dto/create-link.dto';
 
 export enum Status {
@@ -39,6 +39,7 @@ export class CreateColaborateurDto {
   @IsNotEmpty()
   service:string;
 
-
-  links : CreateLinkDto[]
+  @IsArray()
+  @IsOptional()
+  link : CreateLinkDto[]
 }

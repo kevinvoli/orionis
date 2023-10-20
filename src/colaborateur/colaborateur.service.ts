@@ -28,41 +28,46 @@ export class ColaborateurService {
   ){  }
 
   async create(createColaborateurDto: CreateColaborateurDto,image ) {
-    const { links,nom,telephone_fixe ,telephone_portable,email,poste,service} = createColaborateurDto;
-
-   
-    
+    const { link,nom,telephone_fixe ,telephone_portable,email,poste,service} = createColaborateurDto;
     const newColaborateur = new Colaborateur()
     try {
       const postes = await this.posteborateurRepository.findOne({
-        where:{id:+poste}
+        where:{id:+createColaborateurDto.poste}
       })
       const services = await this.ServiceRepository.findOne({
-        where:{id:+service}
+        where:{id:+createColaborateurDto.service}
       })
-      const data=[]
-      for (const linkDto of links) {
-        const lin = new Link();
-        lin.icon = linkDto.icon
-        lin.link = linkDto.link
-        lin.name = linkDto.name
-         data.push(await this.linkRepository.save(lin))
-      }
-      newColaborateur.nom = nom
-      newColaborateur.telephone_fixe = telephone_fixe
-      newColaborateur.telephone_portable = telephone_portable
-      newColaborateur.email = email
+      
+      newColaborateur.nom = createColaborateurDto.nom
+      newColaborateur.telephone_fixe = createColaborateurDto.telephone_fixe
+      newColaborateur.telephone_portable = createColaborateurDto.telephone_portable
+      newColaborateur.email = createColaborateurDto.email
       newColaborateur.poste = postes
       newColaborateur.service = services 
-      console.log("mes", links);
-      newColaborateur.link =  data
       if (image) {
         newColaborateur.photo = `photo/${image.filename}`
       }
-      this.ColaborateurRepository.save(newColaborateur)
-    return newColaborateur;
+      const colaborateur = await this.ColaborateurRepository.save(newColaborateur)
+      if (colaborateur) {
+        for (const linkDto of createColaborateurDto.link) {
+          const lin = new Link();
+          lin.icon = linkDto.icon
+          lin.link = linkDto.link
+          lin.name = linkDto.name
+          lin.colaborateur= colaborateur
+           await this.linkRepository.save(lin)
+        }
+      }
+    return colaborateur;
     } catch (error) {
-      throw new NotFoundException(error)
+      if (error.code === 'ER_DUP_ENTRY') {
+        const duplicateField = error.message.match(/'(.+?)'/);
+        const message = `La valeur dupliquée pour le champ ${duplicateField[1]}.`;
+        throw new ConflictException(`La duplication de données est interdite ${message}`);
+      } else {
+        throw new Error('Une erreur inattendue s\'est produite.');
+      }
+  
     }
   }
 
@@ -141,10 +146,8 @@ export class ColaborateurService {
   
     link.link = newLink;
     await this.linkRepository.save(link);
-  
     return user;
   }
-  
 
   async remove(id: number) {
 

@@ -44,20 +44,28 @@ export class ColaborateurService {
       newColaborateur.email = createColaborateurDto.email
       newColaborateur.poste = postes
       newColaborateur.service = services 
+
+      if(createColaborateurDto.linkedinLink){
+        newColaborateur.linkedinLink = createColaborateurDto.linkedinLink
+      }else if (createColaborateurDto.instagrammeLink) {
+      newColaborateur.instagrammeLink = createColaborateurDto.instagrammeLink
+      }
       if (image) {
         newColaborateur.photo = `photo/${image.filename}`
       }
       const colaborateur = await this.ColaborateurRepository.save(newColaborateur)
-      if (colaborateur) {
-        for (const linkDto of createColaborateurDto.link) {
-          const lin = new Link();
-          lin.icon = linkDto.icon
-          lin.link = linkDto.link
-          lin.name = linkDto.name
-          lin.colaborateur= colaborateur
-           await this.linkRepository.save(lin)
-        }
-      }
+      // if (colaborateur) {
+      //   if (createColaborateurDto.link) {
+      //     for (const linkDto of createColaborateurDto.link) {
+      //       const lin = new Link();
+      //       lin.icon = linkDto.icon
+      //       lin.link = linkDto.link
+      //       lin.name = linkDto.name
+      //       // lin.colaborateur= colaborateur
+      //        await this.linkRepository.save(lin)
+      //     }
+      //   }
+      // }
     return colaborateur;
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
@@ -74,30 +82,27 @@ export class ColaborateurService {
   async findAll() {
     console.log("icicicicic", Date.now());
     try {
-      
       return await this.ColaborateurRepository.find({
         relations:{
           poste:true,
           service:true,
-          link:true
+          // link:true
         }
       });
     } catch (error) {
       throw new NotFoundException(error)
     }
-
   }
 
   async findOne(id: number) {
     console.log("ici");
-    
     try {
       const collaborateur = await this.ColaborateurRepository.findOne({
         where:{id:id},
         relations:{
           poste:true,
           service:true,
-          link:true
+          // link:true
         }
       });
       console.log("les collaborateur",collaborateur)
@@ -126,28 +131,28 @@ export class ColaborateurService {
 
   }
 
-  async updateLink(userId: number, linkId: number, newLink: string){
-    const user = await this.ColaborateurRepository.findOne({
-      where:{id:userId},
-      relations:{
-        poste:true,
-        service:true,
-        link:true
-      }
-    });
-    if (!user) {
-      throw new NotFoundException(`Colaborateur with ID ${userId} not found`);
-    }
+  // async updateLink(userId: number, linkId: number, newLink: string){
+  //   const user = await this.ColaborateurRepository.findOne({
+  //     where:{id:userId},
+  //     relations:{
+  //       poste:true,
+  //       service:true,
+  //       // link:true
+  //     }
+  //   });
+  //   if (!user) {
+  //     throw new NotFoundException(`Colaborateur with ID ${userId} not found`);
+  //   }
   
-    const link = user.link.find((link) => link.id === linkId);
-    if (!link) {
-      throw new NotFoundException(`Link with ID ${linkId} not found for the Colaborateur`);
-    }
+  //   const link = user.link.find((link) => link.id === linkId);
+  //   if (!link) {
+  //     throw new NotFoundException(`Link with ID ${linkId} not found for the Colaborateur`);
+  //   }
   
-    link.link = newLink;
-    await this.linkRepository.save(link);
-    return user;
-  }
+  //   link.link = newLink;
+  //   await this.linkRepository.save(link);
+  //   return user;
+  // }
 
   async remove(id: number) {
 

@@ -55,15 +55,16 @@ export class ColaborateurController {
     return await this.colaborateurService.update(+id, updateColaborateurDto); 
   }
 
-  
-  @Patch(':userId/link/:linkId')
-  async updateLink(
-  @Param('userId') userId: string,
-  @Param('linkId') socialMediaId: string,
-  @Body('newLink') newLink: string,
-) {
-  return await this.colaborateurService.updateLink(+userId, +socialMediaId, newLink);
-}
+
+//   @Patch(':userId/link/:linkId')
+//   async updateLink(
+//   @Param('userId') userId: string,
+//   @Param('linkId') socialMediaId: string,
+//   @Body('newLink') newLink: string,
+// ) {
+
+//   return await this.colaborateurService.updateLink(+userId, +socialMediaId);
+// }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {

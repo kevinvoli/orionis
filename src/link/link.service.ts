@@ -31,7 +31,7 @@ export class LinkService {
       newLink.name = createLinkDto.name
       newLink.icon = createLinkDto.icon
       newLink.link = createLinkDto.link
-      newLink.colaborateur = collaborareur
+      // newLink.colaborateur = collaborareur
       await this.LinkRepository.save(newLink)
      return newLink;
      } catch (error) {
@@ -43,12 +43,12 @@ export class LinkService {
     try {
 
       const link = await this.LinkRepository.find({
-        where:{colaborateur:{
-          id:userId
-        }},
-        relations:{
-         colaborateur:true
-        }
+        // where:{colaborateur:{
+        //   id:userId
+        // }},
+        // relations:{
+        //  colaborateur:true
+        // }
       });
       if (!link) {
         throw new NotFoundException(`SocialMedia with ID ${userId} not found for the user`);
@@ -66,13 +66,13 @@ export class LinkService {
       const collaborateur = await this.LinkRepository.findOne({
         where:{
           id:id,
-          colaborateur:{
-            id:userId
-          }
+          // colaborateur:{
+          //   id:userId
+          // }
         },
-        relations:{
-          colaborateur:true
-        }
+        // relations:{
+        //   colaborateur:true
+        // }
       });
       console.log("les collaborateur",collaborateur)
       return collaborateur    
@@ -86,9 +86,9 @@ export class LinkService {
       const status = await this.LinkRepository.findOne({
         where:{
           id:id,
-          colaborateur:{
-            id:userId
-          }
+          // colaborateur:{
+          //   id:userId
+          // }
 
         }
       })
@@ -107,9 +107,9 @@ export class LinkService {
     try {
       const status = await this.LinkRepository.findOne({
         where: {id:id,
-          colaborateur:{
-            id:userId
-          }
+          // colaborateur:{
+          //   id:userId
+          // }
         }
       });
       if(!status) throw new NotFoundException(`Link with ID ${id} not found` );

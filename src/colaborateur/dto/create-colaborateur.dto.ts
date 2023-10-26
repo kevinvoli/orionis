@@ -38,8 +38,15 @@ export class CreateColaborateurDto {
 
   @IsNotEmpty()
   service:string;
+ 
+  @IsOptional()
+  instagrammeLink: string | null;
+
+  @IsOptional()
+  linkedinLink: string | null;
 
   @IsArray()
   @IsOptional()
+  @IsString()
   link : CreateLinkDto[]
 }

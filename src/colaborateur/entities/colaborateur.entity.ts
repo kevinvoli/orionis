@@ -45,6 +45,12 @@ export class Colaborateur {
   })
   status: Status
 
+  @Column("varchar", { name: "instagrammeLink", nullable: true, length: 255 })
+  instagrammeLink: string | null;
+
+  @Column("varchar", { name: "linkedinLink", nullable: true, length: 255 })
+  linkedinLink: string | null;
+
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
 
@@ -60,6 +66,6 @@ export class Colaborateur {
   @ManyToOne(()=>Service,(service)=> service.colaborateur)
   service:Service
 
-  @OneToMany(() => Link, (link) => link.colaborateur)
-  link: Link[];
+  // @OneToMany(() => Link, (link) => link.colaborateur)
+  // link: Link[];
 }

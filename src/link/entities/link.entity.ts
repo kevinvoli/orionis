@@ -17,7 +17,6 @@ export class Link {
 
   @Column()
   icon: string;
-
   
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
@@ -28,6 +27,6 @@ export class Link {
   @DeleteDateColumn({type:'datetime', name: 'delected_at'})
   delectedAt:Date;
 
-  @ManyToOne(() => Colaborateur, (colaborateur) => colaborateur.link)
-  colaborateur: Colaborateur;
+  // @ManyToOne(() => Colaborateur, (colaborateur) => colaborateur.link)
+  // colaborateur: Colaborateur;
 }

@@ -9,7 +9,7 @@ async function bootstrap() {
   const corsOptions = {
     origin: "*",
     credentials: true,
-    methods:'GET,POST',
+    methods:"*",
     allowedHeaders: 'Content-Type,Authorization',
   };
   app.enableCors(corsOptions);
@@ -20,8 +20,7 @@ async function bootstrap() {
 
   const port =process.env.SERVER_PORT
   await app.listen(port, ()=>{
-    console.log(`votre api tourne sur a le port : ${port}`);
-    
+    console.log(`votre api tourne sur a le port : ${port}`);   
   });
 }
 bootstrap();

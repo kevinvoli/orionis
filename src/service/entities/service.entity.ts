@@ -26,6 +26,13 @@ export class Service {
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
 
+  @Column({
+    type: "enum",
+    enum: Status,
+    default: Status.Active,
+  })
+  status: Status;
+
   @UpdateDateColumn({type:'datetime', name: 'updated_at'})
   updatedAt: Date;
 

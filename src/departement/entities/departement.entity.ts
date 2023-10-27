@@ -23,6 +23,13 @@ export class Departement {
   @Column("varchar", { name: "description", nullable: true, length: 255 })
   description : string;
 
+  @Column({
+    type: "enum",
+    enum: Status,
+    default: Status.Active,
+  })
+  status: Status
+
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
 

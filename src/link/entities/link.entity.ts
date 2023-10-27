@@ -3,6 +3,11 @@
 import { Colaborateur } from 'src/colaborateur/entities/colaborateur.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
+export enum Status{
+  Active=  "Active",
+  Delete = "Delete",
+  Disable = "Disable"
+}
 
 @Entity()
 export class Link {
@@ -17,6 +22,13 @@ export class Link {
 
   @Column()
   icon: string;
+
+  @Column({
+    type: "enum",
+    enum: Status,
+    default: Status.Active,
+  })
+  status: Status;
   
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;

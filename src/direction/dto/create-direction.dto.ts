@@ -14,6 +14,6 @@ export class CreateDirectionDto {
   @IsString()
   description: string|null;
 
-  status: Status
+  status: Status 
 
 }

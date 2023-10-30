@@ -47,7 +47,7 @@ export class ColaborateurController {
     fileFilter:imageFileFilter
   })) // 👈 field name must match
   @Patch(':id')
-  async update(@UploadedFiles() image: Array<Express.Multer.File>, @Param('id') id: string, @Body() updateColaborateurDto: UpdateColaborateurDto) {
+  async update(@UploadedFiles() image: Array<Express.Multer.File>, @Param('id') id: string, @Body() updateColaborateurDto) {
     if (image) {
       let data={...{photo:`photo/${image[0].filename}`},...updateColaborateurDto}
     return await this.colaborateurService.update(+id, updateColaborateurDto);

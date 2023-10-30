@@ -23,7 +23,7 @@ export class DepartementController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateDepartementDto: UpdateDepartementDto) {
+  async update(@Param('id') id: string, @Body() updateDepartementDto) {
     return await this.departementService.update(+id, updateDepartementDto);
   }
 

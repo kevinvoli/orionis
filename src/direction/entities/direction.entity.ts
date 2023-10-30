@@ -2,6 +2,10 @@ import { Departement } from "src/departement/entities/departement.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
+/* The `export enum Status` is defining an enumeration in TypeScript. An enumeration is a way to define
+a set of named constants. In this case, the `Status` enumeration has three constants: `Active`,
+`Delete`, and `Disable`. Each constant is assigned a string value: `"Active"`, `"Delete"`, and
+`"Disable"`. */
 export enum Status{
   Active=  "Active",
   Delete = "Delete",

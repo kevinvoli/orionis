@@ -30,7 +30,7 @@ export class LinkController {
   update(
     @Param('id') id: string,
     @Param('userId') userId: string, 
-    @Body() updateLinkDto: UpdateLinkDto) {
+    @Body() updateLinkDto) {
     return this.linkService.update(+id, updateLinkDto,+userId);
   }
   @Delete(':id/users/:userId')

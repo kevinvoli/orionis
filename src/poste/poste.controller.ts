@@ -30,7 +30,7 @@ export class PosteController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updatePosteDto: UpdatePosteDto) {
+  async update(@Param('id') id: string, @Body() updatePosteDto) {
     console.log("mes id:",id);
     
     return await this.posteService.update(+id, updatePosteDto);

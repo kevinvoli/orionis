@@ -40,6 +40,7 @@ export class ColaborateurService {
       
       newColaborateur.nom = createColaborateurDto.nom
       newColaborateur.telephone_fixe = createColaborateurDto.telephone_fixe
+      newColaborateur.prenoms = createColaborateurDto.prenoms
       newColaborateur.telephone_portable = createColaborateurDto.telephone_portable
       newColaborateur.email = createColaborateurDto.email
       newColaborateur.poste = postes

@@ -22,7 +22,7 @@ export class ColaborateurController {
   
   async create(@UploadedFiles() image: Array<Express.Multer.File>, @Body() createColaborateurDto: CreateColaborateurDto ) {
     
-    console.log("ici aussi mon image",createColaborateurDto);
+    console.log("ici aussi mon image",createColaborateurDto,image);
 
     if (image) {
       return await this.colaborateurService.create(createColaborateurDto,image[0]);

@@ -65,7 +65,7 @@ export class DepartementService {
   }
 
   async update(id: number, updateDepartementDto: UpdateDepartementDto) {
-    console.log("mon id:",id);
+    console.log("mon id:",id,updateDepartementDto);
     
     try {
       const departement = await this.DepartementRepository.findOne({
@@ -74,7 +74,6 @@ export class DepartementService {
         } ,
         relations:{service:true,direction:true}
       })
-      console.log("poste update",departement);
       
       if(!departement) throw new NotFoundException('post null')
       Object.assign(departement, updateDepartementDto)

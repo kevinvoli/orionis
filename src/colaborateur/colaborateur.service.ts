@@ -28,7 +28,7 @@ export class ColaborateurService {
   ){  }
 
   async create(createColaborateurDto: CreateColaborateurDto,image ) {
-    const { link,nom,telephone_fixe ,telephone_portable,email,poste,service} = createColaborateurDto;
+    const {nom,telephone_fixe ,telephone_portable,email,poste,service} = createColaborateurDto;
     const newColaborateur = new Colaborateur()
     try {
       const postes = await this.posteborateurRepository.findOne({

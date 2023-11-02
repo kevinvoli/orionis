@@ -17,9 +17,6 @@ export class DirectionService {
     try {
      newDepartement.nom = createDirectionDto.nom
      newDepartement.description = createDirectionDto.description
-     newDepartement.status = createDirectionDto.status
-
-
       this.DirectionRepository.save(newDepartement)
     return newDepartement;
     } catch (error) {

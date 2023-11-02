@@ -1,5 +1,6 @@
-import { IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Direction } from '../../direction/entities/direction.entity';
+import { Status } from '../../colaborateur/dto/create-colaborateur.dto';
 
 export class CreateDepartementDto {
   @IsNotEmpty()
@@ -10,5 +11,11 @@ export class CreateDepartementDto {
   description: string|null;
 
   @IsNotEmpty()
-  direction: string
+  direction: string;
+  
+
+  @IsOptional()
+  @IsString()
+  status: Status|null;
+
 }

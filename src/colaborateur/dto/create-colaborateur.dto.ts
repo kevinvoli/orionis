@@ -18,8 +18,9 @@ export class CreateColaborateurDto {
   @IsString()
   prenoms:string;
 
-
-  Status: Status|null;
+  @IsOptional()
+  @IsString()
+  status: Status|null;
 
 
   @IsNotEmpty()
@@ -45,8 +46,8 @@ export class CreateColaborateurDto {
   @IsOptional()
   linkedinLink: string | null;
 
-  @IsArray()
-  @IsOptional()
-  @IsString()
-  link : CreateLinkDto[]
+  // @IsArray()
+  // @IsOptional()
+  // @IsString()
+  // link : CreateLinkDto[]
 }

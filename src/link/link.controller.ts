@@ -19,7 +19,7 @@ export class LinkController {
   }
 
   @Get(':id/users/:userId')
-  findOne(
+  async findOne(
     @Param('id') id: string,
     @Param('userId') userId: string
   ) {
@@ -34,7 +34,7 @@ export class LinkController {
     return this.linkService.update(+id, updateLinkDto,+userId);
   }
   @Delete(':id/users/:userId')
-  remove(
+  async remove(
     @Param('id') id: string,
     @Param('userId') userId: string) {
     return this.linkService.remove(+id, +userId);

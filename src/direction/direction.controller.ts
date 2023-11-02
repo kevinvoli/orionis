@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/
 import { DirectionService } from './direction.service';
 import { CreateDirectionDto } from './dto/create-direction.dto';
 import { UpdateDirectionDto } from './dto/update-direction.dto';
+import { UpdateColaborateurDto } from 'src/colaborateur/dto/update-colaborateur.dto';
 
 @Controller('direction')
 export class DirectionController {
@@ -22,15 +23,16 @@ export class DirectionController {
     return this.directionService.findOne(+id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateDirectionDto) {
-    console.log("mes lod status",updateDirectionDto  );
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body() updateDirectionDto:UpdateDirectionDto) {
+    console.log("mes lod status",updateDirectionDto , id );
     
-    return this.directionService.update(+id, updateDirectionDto);
+    return await this.directionService.update(+id, updateDirectionDto);
+    // return "cool"
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.directionService.remove(+id);
   }
 }

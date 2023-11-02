@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DepartementService } from './departement.service';
 import { CreateDepartementDto } from './dto/create-departement.dto';
 import { UpdateDepartementDto } from './dto/update-departement.dto';
+import { UpdateColaborateurDto } from 'src/colaborateur/dto/update-colaborateur.dto';
 
 @Controller('departement')
 export class DepartementController {
@@ -23,7 +24,7 @@ export class DepartementController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateDepartementDto) {
+  async update(@Param('id') id: string, @Body() updateDepartementDto:UpdateColaborateurDto) {
     return await this.departementService.update(+id, updateDepartementDto);
   }
 

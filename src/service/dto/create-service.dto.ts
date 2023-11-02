@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export enum Status{
   Active=  "Active",
@@ -15,7 +15,9 @@ export class CreateServiceDto {
   @IsString()
   description: string|null;
 
-  status: Status
+  @IsOptional()
+  @IsString()
+  status: Status|null;
 
   @IsNotEmpty()
   departement : string

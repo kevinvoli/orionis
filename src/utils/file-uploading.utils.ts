@@ -3,6 +3,7 @@ import { log } from "console";
 import { extname } from "path";
 
 export const imageFileFilter = (req, file, callback) => {
+  console.log('filefilter' ,file);
   
   if (!file.originalname.match(/\.(jpg|jpeg|png|PNG|gif)$/)) {
     return callback(new HttpException('erreur le type de fichier est invalide', HttpStatus.BAD_REQUEST), false);
@@ -28,6 +29,8 @@ export const editFileName = (req, file, callback) => {
 };
 
 export const fileLimite = (req, file, callback) => {
+  console.log( `dsdgvsscbyscbyb`);
+
   const name = file.originalname.split('.')[0];
   const fileExtName = extname(file.originalname);
   console.log( `dsdgvsscbyscbyb${name}-${fileExtName}`);

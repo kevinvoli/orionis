@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export enum Status{
+export enum Status {
   Active=  "Active",
   Delete = "Delete",
   Disable = "Disable"
@@ -12,8 +12,12 @@ export class CreateDirectionDto {
   nom:string;
 
   @IsString()
+  @IsOptional()
   description: string|null;
 
-  status: Status 
+  @IsOptional()
+  @IsString()
+  status: Status|null;
+
 
 }

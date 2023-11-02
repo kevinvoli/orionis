@@ -48,7 +48,10 @@ export class ColaborateurService {
 
       if(createColaborateurDto.linkedinLink){
         newColaborateur.linkedinLink = createColaborateurDto.linkedinLink
-      }else if (createColaborateurDto.instagrammeLink) {
+      }
+      if (createColaborateurDto.instagrammeLink) {
+        console.log("lien insta", createColaborateurDto.instagrammeLink);
+        
       newColaborateur.instagrammeLink = createColaborateurDto.instagrammeLink
       }
       if (image) {

@@ -12,7 +12,7 @@ export class ColaborateurController {
 
 
   @Post()
-  @UseInterceptors(FilesInterceptor('image',1,{
+  @UseInterceptors(FilesInterceptor('photo',1,{
     storage:diskStorage({
       destination:'./photo',
       filename:editFileName,
@@ -20,12 +20,12 @@ export class ColaborateurController {
     fileFilter:imageFileFilter
   })) // 👈 field name must match
   
-  async create(@UploadedFiles() image: Array<Express.Multer.File>, @Body() createColaborateurDto: CreateColaborateurDto ) {
+  async create(@UploadedFiles() photo: Array<Express.Multer.File>, @Body() createColaborateurDto: CreateColaborateurDto ) {
     
-    console.log("ici aussi mon image",createColaborateurDto,image);
+    // console.log("ici aussi mon image",createColaborateurDto,photo);
 
-    if (image) {
-      return await this.colaborateurService.create(createColaborateurDto,image[0]);
+    if (photo) {
+      return await this.colaborateurService.create(createColaborateurDto,photo[0]);
     }
     return await this.colaborateurService.create(createColaborateurDto,false);
 

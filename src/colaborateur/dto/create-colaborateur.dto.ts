@@ -24,9 +24,11 @@ export class CreateColaborateurDto {
 
 
   @IsNotEmpty()
+  @IsOptional()
   telephone_fixe:string | null;
 
   @IsNotEmpty()
+  @IsOptional()
   telephone_portable: string;
 
 

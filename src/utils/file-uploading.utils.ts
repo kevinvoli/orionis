@@ -23,9 +23,9 @@ export const editFileName = (req, file, callback) => {
     .fill(null)
     .map(() => Math.round(Math.random() * 16).toString(16))
     .join(''); 
-    console.log("randomName",`${name}-${randomName}${fileExtName}`);
+    console.log("randomName",`${Date.now()}-${randomName}${fileExtName}`);
        
-  callback(null, `${name}-${randomName}${fileExtName}`);
+  callback(null, `${Date.now()}-${randomName}${fileExtName}`);
 };
 
 export const fileLimite = (req, file, callback) => {

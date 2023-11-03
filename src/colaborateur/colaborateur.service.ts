@@ -45,6 +45,7 @@ export class ColaborateurService {
       newColaborateur.email = createColaborateurDto.email
       newColaborateur.poste = postes
       newColaborateur.service = services 
+      newColaborateur.biographie = createColaborateurDto.biographie
 
       if(createColaborateurDto.linkedinLink){
         newColaborateur.linkedinLink = createColaborateurDto.linkedinLink

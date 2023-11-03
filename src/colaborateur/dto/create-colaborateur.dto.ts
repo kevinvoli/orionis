@@ -22,6 +22,10 @@ export class CreateColaborateurDto {
   @IsString()
   status: Status|null;
 
+  @IsOptional()
+  @IsString()
+  biographie: string|null;
+
 
   @IsNotEmpty()
   @IsOptional()

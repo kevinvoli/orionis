@@ -48,8 +48,4 @@ export class CreateColaborateurDto {
   @IsOptional()
   linkedinLink: string | null;
 
-  // @IsArray()
-  // @IsOptional()
-  // @IsString()
-  // link : CreateLinkDto[]
 }

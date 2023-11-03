@@ -89,7 +89,7 @@ export class ColaborateurService {
       return await this.ColaborateurRepository.find({
         relations:{
           poste:true,
-          service:true,
+          service:{departement:true},
           // link:true
         }
       });
@@ -105,7 +105,7 @@ export class ColaborateurService {
         where:{id:id},
         relations:{
           poste:true,
-          service:true,
+          service:{departement:true},
           // link:true
         }
       });

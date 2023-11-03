@@ -42,7 +42,7 @@ export class DepartementService {
   async findAll() {
     try {
       const departement = await this.DepartementRepository.find({
-        relations:{service:true,direction:true}
+        relations:{service:{colaborateur:true},direction:true}
       })
       return departement
     } catch (error) {
@@ -54,7 +54,8 @@ export class DepartementService {
     try {
       const departement = await this.DepartementRepository.findOne({
         where:{id: id},
-        relations:{service:true,direction:true}
+        relations:{service:{colaborateur:true},
+          direction:true}
       })
       console.log(departement);
       
@@ -72,7 +73,9 @@ export class DepartementService {
         where:{
           id:id
         } ,
-        relations:{service:true,direction:true}
+        relations:{
+          service:{colaborateur:true},
+          direction:true}
       })
       
       if(!departement) throw new NotFoundException('post null')

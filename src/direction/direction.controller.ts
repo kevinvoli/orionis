@@ -20,6 +20,8 @@ export class DirectionController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    console.log("mes truc",id);
+    
     return this.directionService.findOne(+id);
   }
 

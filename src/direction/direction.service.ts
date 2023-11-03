@@ -12,12 +12,12 @@ export class DirectionService {
     private readonly DirectionRepository: Repository<Direction>
   ){  }
 
-  create(createDirectionDto: CreateDirectionDto) {
+  async create(createDirectionDto: CreateDirectionDto) {
     const newDepartement = new Direction()
     try {
      newDepartement.nom = createDirectionDto.nom
      newDepartement.description = createDirectionDto.description
-      this.DirectionRepository.save(newDepartement)
+      await this.DirectionRepository.save(newDepartement)
     return newDepartement;
     } catch (error) {
       throw new NotFoundException()
@@ -27,7 +27,7 @@ export class DirectionService {
   async findAll() {
     try {
       const departement = await this.DirectionRepository.find({
-        relations:{departement:true}
+        relations:{departement:{service:{colaborateur:true}}}
       })
       return departement
     } catch (error) {
@@ -40,8 +40,9 @@ export class DirectionService {
       const departement = await this.DirectionRepository.findOne({
         where:{id: id},
         relations:{
-          departement:true
-        }
+          departement:{service:{colaborateur:true}},
+          
+         }, // Chargez les dé
       })
       return departement
     } catch (error) {

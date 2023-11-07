@@ -66,7 +66,6 @@ export class DepartementService {
   }
 
   async update(id: number, updateDepartementDto: UpdateDepartementDto) {
-    console.log("mon id:",id,updateDepartementDto);
     
     try {
       const departement = await this.DepartementRepository.findOne({

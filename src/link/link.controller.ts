@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
 import { LinkService } from './link.service';
 import { CreateLinkDto } from './dto/create-link.dto';
 import { UpdateLinkDto } from './dto/update-link.dto';
@@ -8,13 +8,12 @@ export class LinkController {
   constructor(private readonly linkService: LinkService) {}
 
   @Post(':collaborateurId')
-  create(@Body() createLinkDto: CreateLinkDto,@Param('collaborateurId') collaborateurId:string) {
-    return this.linkService.create(createLinkDto,+collaborateurId);
+  async create(@Body() createLinkDto: CreateLinkDto,@Param('collaborateurId') collaborateurId:string) {
+    return await this.linkService.create(createLinkDto,+collaborateurId);
   }
 
   @Get(':userId')
   async findAll( @Param('userId') userId: string) {
-    console.log("mes param",userId);
     return await this.linkService.findAll(+userId);
   }
 
@@ -23,21 +22,26 @@ export class LinkController {
     @Param('id') id: string,
     @Param('userId') userId: string
   ) {
-    return this.linkService.findOne(+id,+userId);
+    return await this.linkService.findOne(+id,+userId);
   }
 
   @Patch(':id/users/:userId')
-  update(
+  async update(
     @Param('id') id: string,
     @Param('userId') userId: string, 
     @Body() updateLinkDto) {
-    return this.linkService.update(+id, updateLinkDto,+userId);
+      try {
+         return await this.linkService.update(+id, updateLinkDto,+userId);
+      } catch (error) {
+        throw new HttpException("echec de mise a jour",400,error);
+        
+      }
   }
   @Delete(':id/users/:userId')
   async remove(
     @Param('id') id: string,
     @Param('userId') userId: string) {
-    return this.linkService.remove(+id, +userId);
+    return await this.linkService.remove(+id, +userId);
   }
 
 }

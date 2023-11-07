@@ -42,8 +42,6 @@ export class PosteService {
 
   async findAll() {
     try {
-      console.log("icicicicicici");
-
       const poste = await this.PosteRepository.find({
         relations:{
           colaborateur:true

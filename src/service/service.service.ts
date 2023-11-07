@@ -31,8 +31,7 @@ export class ServiceService {
       newPoste.description = createServiceDto.description
       newPoste.departement = departement
       const poste= await this.ServiceRepository.save(newPoste)
-      console.log("le poste",poste);
-    return newPoste;
+    return poste;
     } catch (error) {
       throw new ConflictException()
     }

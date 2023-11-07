@@ -85,7 +85,6 @@ export class ColaborateurService {
   }
 
   async findAll() {
-    console.log("icicicicic", Date.now());
     try {
       return await this.ColaborateurRepository.find({
         relations:{
@@ -100,7 +99,6 @@ export class ColaborateurService {
   }
 
   async findOne(id: number) {
-    console.log("ici");
     try {
       const collaborateur = await this.ColaborateurRepository.findOne({
         where:{id:id},
@@ -120,6 +118,8 @@ export class ColaborateurService {
   }
 
   async update(id: number, updateColaborateurDto) {
+    console.log("mes photo sont icic",updateColaborateurDto);
+    
     try {
       const status = await this.ColaborateurRepository.findOne({
         where:{id:id}
@@ -128,7 +128,7 @@ export class ColaborateurService {
       if(!status) throw new NotFoundException('facture')
       Object.assign(status, updateColaborateurDto)
       const colaborateur= await this.ColaborateurRepository.save(status)
-      console.log("les collaborateur",colaborateur)
+      // console.log("les collaborateur",colaborateur)
       return colaborateur
     } catch (error) {
       throw new NotFoundException()

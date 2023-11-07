@@ -13,7 +13,6 @@ export class CreateColaborateurDto {
   @IsString()
   nom:string;
 
-
   @IsNotEmpty()
   @IsString()
   prenoms:string;
@@ -25,7 +24,6 @@ export class CreateColaborateurDto {
   @IsOptional()
   @IsString()
   biographie: string|null;
-
 
   @IsNotEmpty()
   @IsOptional()
@@ -51,5 +49,7 @@ export class CreateColaborateurDto {
 
   @IsOptional()
   linkedinLink: string | null;
+  @IsOptional()
+  photo:string
 
 }

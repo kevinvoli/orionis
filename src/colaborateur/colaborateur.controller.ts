@@ -21,14 +21,10 @@ export class ColaborateurController {
   })) // 👈 field name must match
   
   async create(@UploadedFiles() photo: Array<Express.Multer.File>, @Body() createColaborateurDto: CreateColaborateurDto ) {
-    
-    // console.log("ici aussi mon image",createColaborateurDto,photo);
-
     if (photo) {
       return await this.colaborateurService.create(createColaborateurDto,photo[0]);
     }
     return await this.colaborateurService.create(createColaborateurDto,false);
-
   }
 
   @Get()
@@ -40,7 +36,7 @@ export class ColaborateurController {
   async findOne(@Param('id') id: string) {
     return await this.colaborateurService.findOne(+id);
   }
-  @UseInterceptors(FilesInterceptor('image',1,{
+  @UseInterceptors(FilesInterceptor('photo',1,{
     storage:diskStorage({
       destination:'./photo',
       filename:editFileName,
@@ -48,19 +44,17 @@ export class ColaborateurController {
     fileFilter:imageFileFilter
   })) // 👈 field name must match
   @Patch(':id')
-  async update(@UploadedFiles() image: Array<Express.Multer.File>, @Param('id') id: string, @Body() updateColaborateurDto:UpdateColaborateurDto) {
-    console.log("mon colab",updateColaborateurDto);
+  async update(@UploadedFiles() photo: Array<Express.Multer.File>, @Param('id') id: string, @Body() updateColaborateurDto:UpdateColaborateurDto) {
+    // console.log("mon colab",updateColaborateurDto);
     
-    if (image) {
-      if (image.length>1) {
-        console.log(image.length);
-          let data={...{photo:`photo/${image[0].filename}`},...updateColaborateurDto}
-        return await this.colaborateurService.update(+id, updateColaborateurDto);
-        }
-    }
-   
+    if (photo) {
+          let data=updateColaborateurDto
+          data.photo = `photo/${photo[0].filename}`
+          console.log("voir ma photo",photo[0].filename);
+        return await this.colaborateurService.update(+id, data);
+        
+    } 
     return await this.colaborateurService.update(+id, updateColaborateurDto); 
-  
   }
 
 
@@ -70,7 +64,6 @@ export class ColaborateurController {
 //   @Param('linkId') socialMediaId: string,
 //   @Body('newLink') newLink: string,
 // ) {
-
 //   return await this.colaborateurService.updateLink(+userId, +socialMediaId);
 // }
 

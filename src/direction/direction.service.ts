@@ -51,15 +51,12 @@ export class DirectionService {
   }
 
   async update(id: number, updateDirectionDto: UpdateDirectionDto) {
-    console.log("mon id:",id);
-    
     try {
       const departement = await this.DirectionRepository.findOne({
         where:{
           id:id
         } 
       })
-      console.log("poste update",departement);
       
       if(!departement) throw new NotFoundException('post null')
       Object.assign(departement, updateDirectionDto)

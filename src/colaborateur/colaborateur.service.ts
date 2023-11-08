@@ -84,6 +84,50 @@ export class ColaborateurService {
     }
   }
 
+  async findService(id:number){
+    try {
+      const colab = await this.ColaborateurRepository.find({
+        where:{
+          service:{id:id}
+        },
+        relations:{
+          poste:true,
+          service:{departement:true},
+        }
+      })
+      console.log("mes colaborateur", colab); 
+      return colab
+    } catch (error) {
+      throw new NotFoundException(error)
+    }
+  }
+
+
+
+  async findDirection(directionId:number){
+    const collaborateursDeLaDirection = await this.ColaborateurRepository
+    .createQueryBuilder('colaborateur')
+    .leftJoinAndSelect('colaborateur.service', 'service')
+    .leftJoin('service.departement', 'departement')
+    .leftJoinAndSelect('colaborateur.poste','poste')
+    .leftJoin('departement.direction','direction')
+    .where('direction.id = :directionId', { directionId })
+    .getMany();
+  return collaborateursDeLaDirection;
+  }
+
+  async findDepartement(departementId:number){
+
+     const collaborateursDuDepartement = await this.ColaborateurRepository
+     .createQueryBuilder('colaborateur')
+     .leftJoinAndSelect('colaborateur.service', 'service')
+     .leftJoin('service.departement', 'departement')
+     .leftJoinAndSelect('colaborateur.poste','poste')
+     .where('departement.id = :departementId', { departementId })
+     .getMany();
+   return collaborateursDuDepartement;
+  }
+
   async findAll() {
     try {
       return await this.ColaborateurRepository.find({

@@ -45,6 +45,9 @@ export class AppService {
           post:'http://192.168.1.14:3000/api/colaborateur/',
           get:{
             getAll:'http://192.168.1.14:3000/api/colaborateur/',
+            getAllDirection:'http://localhost:3000/api/colaborateur/?directionId=3',
+            getAllDepartement:'http://localhost:3000/api/colaborateur/?departementId=3',
+            getAllServiceId:'http://localhost:3000/api/colaborateur/?serviceId=3',
             getOne:'http://192.168.1.14:3000/api/colaborateur/1'
           },
           update:'http://192.168.1.14:3000/api/colaborateur/:id',

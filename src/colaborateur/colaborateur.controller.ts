@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, UploadedFiles, Query } from '@nestjs/common';
 import { ColaborateurService } from './colaborateur.service';
 import { CreateColaborateurDto } from './dto/create-colaborateur.dto';
 import { UpdateColaborateurDto } from './dto/update-colaborateur.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from 'src/utils/file-uploading.utils';
+import { Colaborateur } from './entities/colaborateur.entity';
 
 @Controller('colaborateur')
 export class ColaborateurController {
@@ -28,11 +29,35 @@ export class ColaborateurController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(
+    @Query('serviceId') serviceId: string,
+    @Query('departementId') departementId: string,
+    @Query('directionId') directionId: string) {
+    if (serviceId) {
+      return await this.colaborateurService.findService(+serviceId)
+    }else if (departementId) {
+    console.log( "mes departement",departementId);
+      return await this.colaborateurService.findDepartement(+departementId)
+    } else if (directionId) {
+      return await this.colaborateurService.findDirection(+directionId)
+    }
+
     return await this.colaborateurService.findAll();
   }
 
-  @Get(':id')
+  // @Get()
+  // async getservice(@Query('serviceId') serviceId: string) {
+  //   console.log( serviceId);
+    
+  //  
+  // }
+  // findAll(@Query('serviceId') serviceId: string) {
+  //   // Votre logique métier pour gérer la requête
+  //   return `Vous avez demandé des informations sur les collaborateurs du service avec l'ID ${serviceId}`;
+  // }
+
+
+  @Get(':id/')
   async findOne(@Param('id') id: string) {
     return await this.colaborateurService.findOne(+id);
   }

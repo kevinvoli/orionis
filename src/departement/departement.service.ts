@@ -73,7 +73,6 @@ export class DepartementService {
   }
 
   async update(id: number, updateDepartementDto: UpdateDepartementDto) {
-    
     try {
       const departement = await this.DepartementRepository.findOne({
         where:{
@@ -83,7 +82,6 @@ export class DepartementService {
           service:{colaborateur:true},
           direction:true}
       })
-      
       if(!departement) throw new NotFoundException('post null')
       Object.assign(departement, updateDepartementDto)
       return await this.DepartementRepository.save(departement)

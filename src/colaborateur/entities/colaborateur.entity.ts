@@ -51,6 +51,9 @@ export class Colaborateur {
   @Column("varchar", { name: "linkedinLink", nullable: true, length: 255 })
   linkedinLink: string | null;
 
+  @Column("varchar", { name: "grade", nullable: true, length: 255 })
+  grade: string | null;
+
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
 
@@ -59,6 +62,7 @@ export class Colaborateur {
 
   @DeleteDateColumn({type:'datetime', name: 'delected_at'})
   delectedAt:Date;
+  
 
   @ManyToOne(()=>Poste,(poste)=> poste.colaborateur)
   poste:Poste

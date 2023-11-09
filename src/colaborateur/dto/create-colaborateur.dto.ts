@@ -38,6 +38,9 @@ export class CreateColaborateurDto {
   @IsEmail()
   email: string;
 
+  @IsOptional()
+  grade:string
+
   @IsNotEmpty()
   poste: number;
 

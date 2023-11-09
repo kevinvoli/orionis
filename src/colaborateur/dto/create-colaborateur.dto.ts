@@ -25,11 +25,11 @@ export class CreateColaborateurDto {
   @IsString()
   biographie: string|null;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   @IsOptional()
   telephone_fixe:string | null;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   @IsOptional()
   telephone_portable: string;
 

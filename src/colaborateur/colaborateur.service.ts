@@ -47,6 +47,8 @@ export class ColaborateurService {
       newColaborateur.service = services 
       newColaborateur.biographie = createColaborateurDto.biographie
 
+
+
       if(createColaborateurDto.linkedinLink){
         newColaborateur.linkedinLink = createColaborateurDto.linkedinLink
       }
@@ -177,45 +179,18 @@ export class ColaborateurService {
     } catch (error) {
       throw new NotFoundException()
     }
-
   }
 
-  // async updateLink(userId: number, linkId: number, newLink: string){
-  //   const user = await this.ColaborateurRepository.findOne({
-  //     where:{id:userId},
-  //     relations:{
-  //       poste:true,
-  //       service:true,
-  //       // link:true
-  //     }
-  //   });
-  //   if (!user) {
-  //     throw new NotFoundException(`Colaborateur with ID ${userId} not found`);
-  //   }
-  
-  //   const link = user.link.find((link) => link.id === linkId);
-  //   if (!link) {
-  //     throw new NotFoundException(`Link with ID ${linkId} not found for the Colaborateur`);
-  //   }
-  
-  //   link.link = newLink;
-  //   await this.linkRepository.save(link);
-  //   return user;
-  // }
-
-  async remove(id: number) {
-
+  async remove(id: number) { 
     try {
       const status = await this.ColaborateurRepository.findOne({
         where: {id}
       });
       if(!status) throw new NotFoundException('facture' );
-  
       await this.ColaborateurRepository.delete({id});
-      return true
+      return await this.ColaborateurRepository.delete({id});
     } catch (error) {
       throw new NotFoundException()
     }
-  
   }
 }

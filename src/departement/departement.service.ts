@@ -18,25 +18,19 @@ export class DepartementService {
 
   
   async create(createDepartementDto: CreateDepartementDto) {
-
-
     const newDepartement = new Departement()
     try {
-
       const service = await this.DirectionRepository.findOne({
         where:{id:+createDepartementDto.direction}
       }) 
      newDepartement.nom = createDepartementDto.nom
      newDepartement.description = createDepartementDto.description
      newDepartement.direction = service
-
-
-      this.DepartementRepository.save(newDepartement)
-    return newDepartement;
+     const departement =  await this.DepartementRepository.save(newDepartement)
+    return departement;
     } catch (error) {
       throw new NotFoundException()
     }
-
   }
 
   async findAll() {
@@ -58,10 +52,23 @@ export class DepartementService {
           direction:true}
       })
       console.log(departement);
-      
       return departement
     } catch (error) {
       throw new NotFoundException()
+    }
+  }
+
+
+  async findDirection(directionId:number){
+    try {
+      const collaborateursDeLaDirection = await this.DepartementRepository
+    .createQueryBuilder('departement')
+    .leftJoinAndSelect('departement.direction','direction')
+    .where('direction.id = :directionId', { directionId })
+    .getMany();
+  return collaborateursDeLaDirection;
+    } catch (error) {
+      throw new NotFoundException(error)
     }
   }
 

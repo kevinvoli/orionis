@@ -71,10 +71,10 @@ export class ColaborateurController {
   @Patch(':id')
   async update(@UploadedFiles() photo: Array<Express.Multer.File>, @Param('id') id: string, @Body() updateColaborateurDto:UpdateColaborateurDto) {
     // console.log("mon colab",updateColaborateurDto);
-    console.log("eqsrdtfyghujklmkjhgf",photo.length);
+ 
     
     if (photo.length >=1) {
-    console.log("aaaaaaaaaaaaaaa",photo);
+    
       
           let data=updateColaborateurDto
           data.photo = `photo/${photo[0].filename}`

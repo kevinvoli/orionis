@@ -41,6 +41,9 @@ export class CreateColaborateurDto {
   @IsOptional()
   grade:string
 
+  @IsOptional()
+  sexe:string
+
   @IsNotEmpty()
   poste: number;
 

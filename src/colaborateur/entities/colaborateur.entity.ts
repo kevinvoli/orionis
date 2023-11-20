@@ -54,6 +54,9 @@ export class Colaborateur {
   @Column("varchar", { name: "grade", nullable: true, length: 255 })
   grade: string | null;
 
+  @Column("varchar", { name: "sexe", nullable: true, length: 255 })
+  sexe: string | null;
+
   @CreateDateColumn({type:'datetime',  name: 'created_at'})
   createdAt: Date;
 
@@ -69,7 +72,5 @@ export class Colaborateur {
   
   @ManyToOne(()=>Service,(service)=> service.colaborateur)
   service:Service
-
-  // @OneToMany(() => Link, (link) => link.colaborateur)
-  // link: Link[];
+  
 }

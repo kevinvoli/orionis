@@ -12,6 +12,7 @@ import { ServiceModule } from './service/service.module';
 import { LinkModule } from './link/link.module';
 import { AdminModule } from './admin/admin.module';
 // import { AuthModule } from './auth/auth.module';
+import { ResponsableDirectionModule } from './responsable-direction/responsable-direction.module';
 import * as Joi from '@hapi/joi'
 
 @Module({
@@ -24,7 +25,7 @@ import * as Joi from '@hapi/joi'
       MYSQL_DATABASE:Joi.string().required(),
     })
   }),
-    PosteModule, DatabaseModule, ColaborateurModule, MediaModule, DepartementModule, DirectionModule, ServiceModule, LinkModule, AdminModule, 
+    PosteModule, DatabaseModule, ColaborateurModule, MediaModule, DepartementModule, DirectionModule, ServiceModule, LinkModule, AdminModule, ResponsableDirectionModule, 
     // AuthModule
   ],
   controllers: [AppController],

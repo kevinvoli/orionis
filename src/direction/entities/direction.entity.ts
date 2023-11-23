@@ -1,4 +1,5 @@
 import { Departement } from "src/departement/entities/departement.entity";
+import { ResponsableDirection } from "src/responsable-direction/entities/responsable-direction.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
@@ -36,5 +37,6 @@ export class Direction {
   @OneToMany(()=>Departement,(departement)=> departement.direction)
   departement:Departement[]
 
-
+  @ManyToOne(()=>ResponsableDirection,(responsable)=> responsable.direction)
+  responsable:ResponsableDirection
 }

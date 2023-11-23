@@ -1,5 +1,6 @@
 import { Link } from "src/link/entities/link.entity";
 import { Poste } from "src/poste/entities/poste.entity";
+import { ResponsableDirection } from "src/responsable-direction/entities/responsable-direction.entity";
 import { Service } from "src/service/entities/service.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -72,5 +73,7 @@ export class Colaborateur {
   
   @ManyToOne(()=>Service,(service)=> service.colaborateur)
   service:Service
-  
+
+  @OneToMany(()=>ResponsableDirection,(responsableDirection)=> responsableDirection.collaborateur)
+  responsableDir:ResponsableDirection[]  
 }

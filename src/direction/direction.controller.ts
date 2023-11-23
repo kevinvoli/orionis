@@ -11,6 +11,7 @@ export class DirectionController {
   @Post()
   create(@Body() createDirectionDto: CreateDirectionDto) {
     return this.directionService.create(createDirectionDto);
+    
   }
 
   @Get()

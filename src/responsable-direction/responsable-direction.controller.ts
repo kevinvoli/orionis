@@ -3,18 +3,23 @@ import { ResponsableDirectionService } from './responsable-direction.service';
 import { CreateResponsableDirectionDto } from './dto/create-responsable-direction.dto';
 import { UpdateResponsableDirectionDto } from './dto/update-responsable-direction.dto';
 
+
 @Controller('responsable-direction')
 export class ResponsableDirectionController {
   constructor(private readonly responsableDirectionService: ResponsableDirectionService) {}
 
   @Post()
-  create(@Body() createResponsableDirectionDto: CreateResponsableDirectionDto) {
-    return this.responsableDirectionService.create(createResponsableDirectionDto);
+  async create(@Body() createResponsableDirectionDto: CreateResponsableDirectionDto) {
+    console.log("mon log:",createResponsableDirectionDto);
+    
+    return await this.responsableDirectionService.create(createResponsableDirectionDto);
   }
 
   @Get()
-  findAll() {
-    return this.responsableDirectionService.findAll();
+  async findAll() {
+    console.log("mon get");
+    
+    return await this.responsableDirectionService.findAll();
   }
 
   @Get(':id')

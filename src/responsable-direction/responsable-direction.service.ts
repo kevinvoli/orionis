@@ -25,12 +25,12 @@ export class ResponsableDirectionService {
 
   async create(createResponsableDirectionDto: CreateResponsableDirectionDto) {
     const collaborateur  = await this.collaborateurRepository.findOne(
-      {where:{id: +createResponsableDirectionDto.direction}})
-      console.log(collaborateur);
+      {where:{id: +createResponsableDirectionDto.collaborateur}})
+      console.log("collaborateur",collaborateur);
 
       if(!collaborateur) throw new NotFoundException('null' );
     const direction = await this.directionRepository.findOne({where: {id: +createResponsableDirectionDto.direction}}) 
-console.log(direction);
+console.log("direction",direction);
 
     if(!direction) throw new NotFoundException('null' );
 
